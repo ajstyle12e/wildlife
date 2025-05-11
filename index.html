@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Local Wildlife & Conservation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f8f5;
+    }
+    header {
+      background-color: #2e8b57;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #3cb371;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    main {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #2e8b57;
+    }
+    .wildlife-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .wildlife-card {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      cursor: pointer;
+    }
+    .wildlife-card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    footer {
+      background-color: #2e8b57;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    /* Lightbox styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+    .lightbox img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 8px;
+    }
+    .lightbox:active {
+      display: none;
+    }
+    /* Form styles */
+    .form-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .form-container input, .form-container textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .form-container button {
+      background-color: #2e8b57;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background-color: #3cb371;
+    }
+    .tips-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .tips-list li {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Local Wildlife & Conservation</h1>
+    <p>Protecting nature for future generations</p>
+  </header>
+  <nav>
+    <a href="#wildlife">Wildlife</a>
+    <a href="#conservation">Conservation Tips</a>
+    <a href="#contact">Contact</a>
+    <a href="#protection">How We Can Protect</a>
+  </nav>
+  <main>
+    <section id="wildlife">
+      <h2>Local Wildlife and Plants</h2>
+      <div class="wildlife-list" id="wildlifeContainer"></div>
+    </section>
+
+    <section id="protection">
+      <h2>How We Can Protect Wildlife</h2>
+      <p>We all have a role in preserving the biodiversity around us. Here are some ways we can help:</p>
+      <ul class="tips-list">
+        <li>Support local wildlife sanctuaries and parks.</li>
+        <li>Reduce habitat destruction by minimizing deforestation.</li>
+        <li>Plant native species to support local pollinators like bees and butterflies.</li>
+        <li>Volunteer for clean-up events and habitat restoration.</li>
+      </ul>
+    </section>
+
+    <section id="conservation">
+      <h2>Conservation Tips</h2>
+      <ul class="tips-list">
+        <li>Reduce plastic use and recycle.</li>
+        <li>Plant native species in your garden.</li>
+        <li>Support local wildlife reserves.</li>
+        <li>Join community clean-up events.</li>
+      </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Join Us in Protecting Wildlife</h2>
+      <div class="form-container">
+        <h3>Sign up to Volunteer</h3>
+        <form id="joinForm">
+          <input type="text" id="name" name="name" placeholder="Your Name" required />
+          <input type="email" id="email" name="email" placeholder="Your Email" required />
+          <textarea id="interest" name="interest" rows="4" placeholder="Why do you want to help?" required></textarea>
+          <button type="submit">Join Us</button>
+        </form>
+      </div>
+
+      <h2>Suggestions and Queries</h2>
+      <div class="form-container">
+        <h3>Submit Your Suggestions or Queries</h3>
+        <form id="queryForm">
+          <input type="text" id="queryName" name="queryName" placeholder="Your Name" required />
+          <input type="email" id="queryEmail" name="queryEmail" placeholder="Your Email" required />
+          <textarea id="queryMessage" name="queryMessage" rows="4" placeholder="Your Query/Suggestion" required></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Local Wildlife & Conservation</p>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <img src="" alt="Lightbox Image" id="lightboxImage" />
+  </div>
+
+  <script>
+    const wildlifeData = [
+      {
+        name: "Red Fox",
+        description: "A common mammal in suburban and rural areas, known for its cunning nature.",
+        image: "https://tse3.mm.bing.net/th?id=OIP.KcNx0JBThs-hhf2zHccmkwHaEK&pid=Api&P=0&h=180"
+      },
+      {
+        name: "Barn Owl",
+        description: "A nocturnal bird with a distinctive heart-shaped face and haunting screech.",
+        image: "https://tse1.mm.bing.net/th?id=OIP.KDgMekl5BJapO0zm59q4wgHaE8&pid=Api&P=0&h=180"
+      },
+      {
+        name: "Eastern Box Turtle",
+        description: "A slow-moving reptile often found in forests and grasslands.",
+        image: "https://tse4.mm.bing.net/th?id=OIP.l4JuGgVYU2sfi4EgLhhW9AHaGE&pid=Api&P=0&h=180"
+      },
+      {
+        name: "White-tailed Deer",
+        description: "Graceful herbivore native to North America, commonly seen in wooded areas.",
+        image: "https://tse2.mm.bing.net/th?id=OIP.5Jdj4JGBCoQpfVUetHEVTQHaE8&pid=Api&P=0&h=180"
+      },
+      {
+        name: "Common Milkweed",
+        description: "A native plant important for Monarch butterflies' lifecycle.",
+        image: "https://tse3.mm.bing.net/th?id=OIP.ZmS17Op48baEKqbQB98MeQHaHa&pid=Api&P=0&h=180"
+      },
+      {
+        name: "Monarch Butterfly",
+        description: "Famous for its long migration and dependence on milkweed plants.",
+        image: "https://tse4.mm.bing.net/th?id=OIP.ydYKAWQIW2paC1T86Wp3gwHaE8&pid=Api&P=0&h=180"
+      }
+    ];
+
+    const container = document.getElementById("wildlifeContainer");
+    wildlifeData.forEach(animal => {
+      const card = document.createElement("div");
+      card.className = "wildlife-card";
+      card.innerHTML = `
+        <img src="${animal.image}" alt="${animal.name}" onclick="openLightbox('${animal.image}')"/>
+        <h3>${animal.name}</h3>
+        <p>${animal.description}</p>
+      `;
+      container.appendChild(card);
+    });
+
+    function openLightbox(imageSrc) {
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      lightboxImage.src = imageSrc;
+      lightbox.style.display = "flex";
+    }
+
+    document.getElementById("lightbox").addEventListener("click", function() {
+      this.style.display = "none";
+    });
+
+    // Handle form submissions
+    document.getElementById("joinForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you for joining us! You will be contacted soon.");
+      this.reset();
+    });
+
+    document.getElementById("queryForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Thank you for your suggestion/query! We will get back to you shortly.");
+      this.reset();
+    });
+  </script>
+</body>
+</html>
